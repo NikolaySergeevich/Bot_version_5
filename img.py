@@ -73,9 +73,7 @@ def create_5_pl(us_id, arr_name_spec):
     color = '#500805'
 
     lable = t.get_list_whis_title_on_russian()
-    color_green = '#2e8b57'#зелёный
-    color_red = '#cc0605'#красный
-    color_wite = '#ffffff'#белый
+    
     for name in arr_name_spec:
         plt.figure(figsize=(12,10), facecolor='#f9f9ff')#фон окна. Цвет - хлопок
         ax = plt.subplot(111, polar=True)
@@ -117,6 +115,9 @@ def create_5_pl(us_id, arr_name_spec):
         r_per = np.array(wor.get_data_frame_only_value(df_per))
         bar_cons = ax.bar(x=theta, height=r_cons-.0, width=width, bottom=0, alpha=0.7, tick_label=title2, align='edge', color = color)
         
+        color_green = '#2e8b57'#зелёный
+        color_red = '#cc0605'#красный
+        color_wite = '#ffffff'#белый
         for r_p, r_cons, bar, bar_cons in zip (r_per, r_cons, bars, bar_cons):
             bar.set_facecolor(color_wite)
             bar_cons.set_facecolor(color_wite)
