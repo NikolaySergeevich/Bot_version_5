@@ -565,6 +565,8 @@ async def answer_for_working_with_a_large_amount_of_information(call: types.Call
     db.update_user(call.from_user.id, 1)
     db.update_time_content_test(call.from_user.id)
     db.update_link_data_test(call.from_user.id)
+    for name in t.name_specific:
+        db.update_link_copmare(call.from_user.id, name)
     db.connection.commit()
     db.commit()
     # метод, который вносит данные в таблицу теста

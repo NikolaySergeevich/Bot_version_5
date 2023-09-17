@@ -63,6 +63,12 @@ class Sqloghter:
     def update_link_data_test(self, user_id):
         #записываем ссылку картинки в базу 
         return self.cursor.execute("CALL update_link_data_test ('{0}', '{1}')".format(user_id, t.get_way_of_img(user_id)))
+                
+    def update_link_copmare(self, user_id, name_specific):
+        #использовние 5 разных процедур. Каждая для отдельного графика сравнения
+        procedure_name = 'update_link_data_compare_' + name_specific
+        return self.cursor.execute("CALL {0} ('{1}', '{2}');".format(procedure_name, user_id, t.get_way_of_img_compare(user_id, name_specific)))
+    
     
 
 
@@ -82,4 +88,6 @@ class Sqloghter:
     def close(self):
         """Закрываем соединение с бд"""
         self.connection.close()
+
+
             
