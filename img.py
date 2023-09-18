@@ -78,8 +78,8 @@ def create_5_pl(us_id, arr_name_spec):
         plt.figure(figsize=(12,10), facecolor='#f9f9ff')#фон окна. Цвет - хлопок
         ax = plt.subplot(111, polar=True)
 
-        plt.text(-1, -1, wor.get_sum_data(df), size = 40, horizontalalignment='center',
-            verticalalignment='center', color = color)#делает в центре надпись суммы очков
+        # plt.text(-1, -1, wor.get_sum_data(df), size = 40, horizontalalignment='center',
+        #     verticalalignment='center', color = color)#делает в центре надпись суммы очков
     # --------------------Заполнение окружности по уровням 
         ycoord = 0.45
         for num in 1,2,3,4,5:
@@ -118,21 +118,25 @@ def create_5_pl(us_id, arr_name_spec):
         color_green = '#2e8b57'#зелёный
         color_red = '#cc0605'#красный
         color_wite = '#ffffff'#белый
+        bals = 0
         for r_p, r_cons, bar, bar_cons in zip (r_per, r_cons, bars, bar_cons):
             bar.set_facecolor(color_wite)
             bar_cons.set_facecolor(color_wite)
             if r_p > r_cons and r_cons > 0:
                 bar_cons.set_facecolor(color_red)
                 bar.set_facecolor(color_green)
+                bals += r_p
             if r_p == r_cons:
                 bar_cons.set_facecolor(color_green)
                 bar.set_facecolor(color_wite)
+                bals += r_p
             if r_p < r_cons:
                 bar_cons.set_facecolor(color_red)
                 bar.set_facecolor(color_green)
             if r_cons == 0:
                 bar.set_facecolor(color_red)
-        
+        plt.text(-1, -1, bals, size = 40, horizontalalignment='center',
+            verticalalignment='center', color = color)
         
         way = t.get_way_of_img_compare(us_id, name)#путь и название для картинки
         plt.savefig(way)
