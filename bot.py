@@ -595,9 +595,19 @@ async def start(message: types.Message):
     with open(t.get_way_of_img('analist'), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
 
+@dp.message_handler(commands=['get_graf_compare_with_analist'])
+async def start(message: types.Message):
+    with open(t.get_way_of_img_compare(message.from_user.id, 'analist'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+
 @dp.message_handler(commands=['get_graf_developer'])
 async def start(message: types.Message):
     with open(t.get_way_of_img('developer'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+        
+@dp.message_handler(commands=['get_graf_compare_with_developer'])
+async def start(message: types.Message):
+    with open(t.get_way_of_img_compare(message.from_user.id, 'developer'), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
         
 @dp.message_handler(commands=['get_graf_tester']) 
@@ -605,14 +615,29 @@ async def start(message: types.Message):
     with open(t.get_way_of_img('tester'), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
 
+@dp.message_handler(commands=['get_graf_compare_with_tester'])
+async def start(message: types.Message):
+    with open(t.get_way_of_img_compare(message.from_user.id, 'tester'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+
 @dp.message_handler(commands=['get_graf_project'])
 async def start(message: types.Message):
     with open(t.get_way_of_img('project'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+
+@dp.message_handler(commands=['get_graf_compare_with_project'])
+async def start(message: types.Message):
+    with open(t.get_way_of_img_compare(message.from_user.id, 'project'), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
         
 @dp.message_handler(commands=['get_graf_prodact'])
 async def start(message: types.Message):
     with open(t.get_way_of_img('prodact'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+
+@dp.message_handler(commands=['get_graf_compare_with_prodact'])
+async def start(message: types.Message):
+    with open(t.get_way_of_img_compare(message.from_user.id, 'prodact'), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
 
 #запускаем лонг поллинг
