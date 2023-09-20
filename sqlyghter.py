@@ -38,6 +38,13 @@ class Sqloghter:
         item = list[0]['indicate'] # получаем значение из словаря по ключу 'indicate'
         return item
     
+    def giv_volue_compare(self,column_names, user_id):
+        # процедура принимает имя столбца и id, возвращет значение из таблице capabilities по id пользователя, но возвращает из определённого столбца
+        self.cursor.execute("CALL giv_volues_compare ('{0}', '{1}')".format(column_names, user_id))
+        list = self.cursor.fetchall() #это команда возвращает список в котором лежит словарь {'column_names': 0}
+        item = list[0][column_names] # получаем значение из словаря по ключу 'indicate'
+        return item
+    
     def get_value_capabilities(self, user_id):
         '''получаем данные из таблицы  capabilities по user_id'''
         self.cursor.execute("CALL get_value_capabilities ('{0}')".format(user_id))
@@ -63,7 +70,11 @@ class Sqloghter:
     def update_link_data_test(self, user_id):
         #записываем ссылку картинки в базу 
         return self.cursor.execute("CALL update_link_data_test ('{0}', '{1}')".format(user_id, t.get_way_of_img(user_id)))
-                
+
+    def update_link_finish_img(self, user_id):
+        #записываем ссылку финишной с результатми сравнения картинки в базу 
+        return self.cursor.execute("CALL update_link_finish_img ('{0}', '{1}')".format(user_id, t.get_way_of_finish_img(user_id)))
+
     def update_link_copmare(self, user_id, name_specific):
         #использовние 5 разных процедур. Каждая для отдельного графика сравнения
         procedure_name = 'update_link_data_compare_' + name_specific

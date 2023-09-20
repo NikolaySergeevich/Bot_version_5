@@ -579,6 +579,7 @@ async def answer_for_working_with_a_large_amount_of_information(call: types.Call
 
     img.plt_result(call.from_user.id)
     img.create_5_pl(call.from_user.id, t.name_specific)
+    img.img_with_resalt(call.from_user.id, call.from_user.full_name)
     # img.save_plt_in_disc(plt, call.from_user.id)
 
 @dp.message_handler(commands=['get_my_graf'])
@@ -638,6 +639,11 @@ async def start(message: types.Message):
 @dp.message_handler(commands=['get_graf_compare_with_prodact'])
 async def start(message: types.Message):
     with open(t.get_way_of_img_compare(message.from_user.id, 'prodact'), 'rb') as photo:
+        await bot.send_photo(chat_id=message.from_user.id, photo = photo)
+
+@dp.message_handler(commands=['get_general_compare'])
+async def start(message: types.Message):
+    with open(t.get_way_of_finish_img(message.from_user.id), 'rb') as photo:
         await bot.send_photo(chat_id=message.from_user.id, photo = photo)
 
 #запускаем лонг поллинг

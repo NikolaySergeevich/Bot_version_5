@@ -51,7 +51,7 @@ def plt_result(us_id):
 
 
     bars = ax.bar(x=theta, height=r-.0, width=width, bottom=0, alpha=0.7, tick_label=title2, align='edge', color = color)
-    # name_specific = ["analist", "tester", "developer", "prodact", "project"]
+    
     color_list = []
     
     if us_id == "analist":

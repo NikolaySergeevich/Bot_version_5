@@ -12,8 +12,13 @@ def get_way_of_img(user_id):
     return 'D:/Учёба в GB/Дипломный проект/Работа/Бот 5/result_img/' + str(user_id) +'_result_test.png'
 def get_way_of_img_compare(user_id, specific):
     return 'D:/Учёба в GB/Дипломный проект/Работа/Бот 5/result_img/' + str(user_id) + '_compare_'+ specific +'_result_test.png'
+def get_way_of_finish_img(user_id):
+    return 'D:/Учёба в GB/Дипломный проект/Работа/Бот 5/result_img/' + str(user_id) +'_finish.png'
 
-name_specific = ["analist", "tester", "developer", "prodact", "project"]
+name_specific = ["developer", "tester", "analist", "project", "prodact"]
+name_compsre_specific = ["sum_bals_compare_with_developer", "sum_bals_compare_with_tester", "sum_bals_compare_with_analist", "sum_bals_compare_with_project", "sum_bals_compare_with_prodact"]
+name_specific_rus = ["Программист", "Тестировщик", "Аналитик", "Проджект-\nменеджер", "Продакт-\nменеджер", " "]
+defolt_resulr_passing_grade = {"Программист":"20", "Тестировщик":"15", "Аналитик":"20", "Проджект-\nменеджер":"25", "Продакт-\nменеджер":"25"}
 
 color_for_analist = ["#f1dcc9","#ffb793","#9f4636","#6c2d2c","#42313a"] 
 color_for_tester = ["#e2c499","#e8a735","#ff7606","#c8000a","#8c0004"] 
@@ -21,6 +26,7 @@ color_for_developer = ["#755248","#f79b77","#086488","#4b4345","#fcdbcd"]
 color_for_prodact = ["#323030","#cdbea7","#ba5536","#882426","#c29545"] 
 color_for_project = ["#444c5c","#ff734d","#ce5a57","#78a5a3","#e1b16a"] 
 color_for_person = ["#505160","#6a71","#68829e","#aebd38","#598234"] 
+color_for_finish_img = ["#fb7819","#fc0fc0","#f5ee00","#28e4f3","#9d22f2", "#ffffff"]
 
 hello_text = 'Привет, {name}, я бот и я предлагаю тебе пройти тест \n<b>"Колесо компетенций"</b> от <b>GeekBrains.</b>\n\
             После прохождения теста ты сможешь взглянуть на свой портрет, а так же сравнить его с портретами для \nIT-специальностей, таких как\n\

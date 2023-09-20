@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import NullFormatter
 import os
 import text as t
+from sqlyghter import Sqloghter
+
+
+#инициализирукм соединение с БД
+db = Sqloghter()
 
 
 def plt_result(us_id):
@@ -18,8 +23,13 @@ def plt_result(us_id):
     lable = t.get_list_whis_title_on_russian()
     plt.figure(figsize=(12,10), facecolor='#f9f9ff')#фон окна. Цвет - хлопок
     ax = plt.subplot(111, polar=True)
+    sum_bals = wor.get_sum_data(df)
 
-    plt.text(-1, -1, wor.get_sum_data(df), size = 40, horizontalalignment='center',
+    db.update_degry_whis_dinamic_reqest(us_id, 'sum_general_bals', sum_bals)#обновляет общую сумму балов в БД
+    db.connection.commit()
+    db.commit()
+
+    plt.text(-1, -1, sum_bals, size = 40, horizontalalignment='center',
         verticalalignment='center', color = color)#делает в центре надпись суммы очков
     # --------------------Заполнение окружности по уровням 
     ycoord = 0.45
@@ -74,7 +84,7 @@ def create_5_pl(us_id, arr_name_spec):
 
     lable = t.get_list_whis_title_on_russian()
     
-    for name in arr_name_spec:
+    for name, name_compare in zip(arr_name_spec, t.name_compsre_specific):
         plt.figure(figsize=(12,10), facecolor='#f9f9ff')#фон окна. Цвет - хлопок
         ax = plt.subplot(111, polar=True)
 
@@ -137,10 +147,31 @@ def create_5_pl(us_id, arr_name_spec):
                 bar.set_facecolor(color_red)
         plt.text(-1, -1, bals, size = 40, horizontalalignment='center',
             verticalalignment='center', color = color)
+        db.update_degry_whis_dinamic_reqest(us_id, name_compare, bals)#ОБНОВЛЯЕМ данные в базе данных. Кол-во балов набраных при сравнении со специальностью
+        db.connection.commit()
+        db.commit()
         
         way = t.get_way_of_img_compare(us_id, name)#путь и название для картинки
         plt.savefig(way)
 
+def img_with_resalt(us_id, user_name): #этот метод создаёт итоговую картинку
+    fig, axs = plt.subplots(2, 3, sharex=True, sharey=True, layout="constrained", figsize=(8, 6), facecolor='#f9f9ff')
+    for ax, name, colo, name_compare in zip(axs.flat, t.name_specific_rus, t.color_for_finish_img, t.name_compsre_specific):
+        ax.text(0.25, 0.8, name, size = 13, family='sans-serif', weight='semibold',  horizontalalignment='left')
+        ax.text(0.3, 0.45, "      ", size=25, bbox=dict(boxstyle="round", ec=colo, fc='#f9f9ff'))
+        ax.text(0.6, 0.385, "Проходной\nбал", size=6, weight='roman', color = colo)
+        ax.text(0.35, 0.43, db.giv_volue_compare(name_compare, us_id), size=30, weight='roman')
+        ax.text(0.6, 0.46, t.defolt_resulr_passing_grade[name], size=30, weight='roman', color = colo)
+    for ax in axs.flat:
+        ax.set_axis_off()
+
+    fig.suptitle('Твой результат, ' + user_name, verticalalignment='top', weight='semibold')
+    way = t.get_way_of_finish_img(us_id)#путь и название для картинки
+    plt.savefig(way)
+    db.update_link_finish_img(us_id)
+    db.connection.commit()
+    db.commit()
+    # plt.show()
 
 def remove_img(name_img): 
     path = name_img
