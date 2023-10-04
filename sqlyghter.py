@@ -1,15 +1,18 @@
 import pymysql
-from config import userr, passwordd, hostt, db_namee
+# from config import userr, passwordd, hostt, db_namee
 import text as t
+import configparser  # импортируем библиотеку
+config = configparser.ConfigParser()  # создаём объекта парсера
+config.read("D:/Учёба в GB/Дипломный проект/Работа/Бот 5/ConfigNew.ini")  # читаем конфиг
 
 class Sqloghter:
     def __init__(self):
         self.connection = pymysql.connect(
-            user=userr,
-            host=hostt,
+            user=config["MySql"]["userr"],
+            host=config["MySql"]["hostt"],
             port=3306,
-            password=passwordd,
-            database=db_namee,
+            password=config["MySql"]["passwordd"],
+            database=config["MySql"]["db_namee"],
             cursorclass=pymysql.cursors.DictCursor
         )
         self.cursor = self.connection.cursor()

@@ -1,6 +1,6 @@
-import config
+# import config
 import logging
-from telebot import types
+# from telebot import types
 import button as bt
 import text as t
 import matplotlib.pyplot as plt
@@ -9,13 +9,22 @@ import img
 from aiogram import Bot, Dispatcher, executor, types
 from sqlyghter import Sqloghter
 
+import configparser  # импортируем библиотеку
+
+config = configparser.ConfigParser()  # создаём объекта парсера
+config.read("D:/Учёба в GB/Дипломный проект/Работа/Бот 5/ConfigNew.ini")  # читаем конфиг
+
 
 #задаём уровень логов
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
+logging.basicConfig(format = u'%(levelname)-8s [%(asctime)s] %(message)s', level = logging.INFO, filename = u'D:/Учёба в GB/Дипломный проект/Работа/Бот 5/mylog.log')
 
 #Инициализируем бота
-bot = Bot(token=config.TOKEN)
+# bot = Bot(token=config.TOKEN)
+# dp = Dispatcher(bot)
+bot = Bot(token=config["Bot"]["token"])
 dp = Dispatcher(bot)
+
 
 #инициализирукм соединение с БД
 db = Sqloghter()

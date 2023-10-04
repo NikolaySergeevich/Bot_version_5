@@ -1,0 +1,32 @@
+INFO     [2023-09-28 17:58:27,246] Bot: Мой бот 4 [@PavlGBTest4bot]
+WARNING  [2023-09-28 17:58:27,398] Updates were skipped successfully.
+INFO     [2023-09-28 17:58:27,398] Start polling.
+INFO     [2023-09-28 18:24:19,317] Bot: Мой бот 4 [@PavlGBTest4bot]
+WARNING  [2023-09-28 18:24:19,505] Updates were skipped successfully.
+INFO     [2023-09-28 18:24:19,505] Start polling.
+INFO     [2023-09-28 18:28:31,867] Bot: Мой бот 4 [@PavlGBTest4bot]
+WARNING  [2023-09-28 18:28:32,041] Updates were skipped successfully.
+INFO     [2023-09-28 18:28:32,041] Start polling.
+ERROR    [2023-09-28 18:41:50,371] Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+                 ^^^^^^^^^^^^^^^^
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiohttp\client.py", line 560, in _request
+    await resp.start(conn)
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiohttp\client_reqrep.py", line 894, in start
+    with self._timer:
+  File "C:\Users\mikol\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiohttp\helpers.py", line 721, in __exit__
+    raise asyncio.TimeoutError from None
+TimeoutError
